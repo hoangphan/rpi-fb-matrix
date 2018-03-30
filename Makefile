@@ -9,8 +9,15 @@
 # to configure the library for more special needs.  See the library's docs for
 # details on options:
 #   https://github.com/hzeller/rpi-rgb-led-matrix/blob/master/lib/Makefile
-export HARDWARE_DESC=adafruit-hat
+export HARDWARE_DESC=
 export USER_DEFINES=-DRGB_SLOWDOWN_GPIO=1
+
+RGB_INCDIR=matrix/include
+RGB_LIBDIR=matrix/lib
+RGB_LIBRARY_NAME=rgbmatrix
+RGB_LIBRARY=$(RGB_LIBDIR)/lib$(RGB_LIBRARY_NAME).a
+
+
 
 # Configure compiler and libraries:
 CXX = g++
@@ -29,7 +36,7 @@ display-test: display-test.o GridTransformer.o Config.o glcdfont.o ./rpi-rgb-led
 %.o: %.cpp $(DEPS)
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
-./rpi-rgb-led-matrix/lib/librgbmatrix.a:
+./rpi-rgb-led-matrix/lib/librgbmatrix.a: FORCE
 	$(MAKE) -C ./rpi-rgb-led-matrix/lib
 
 .PHONY: clean
@@ -37,3 +44,6 @@ display-test: display-test.o GridTransformer.o Config.o glcdfont.o ./rpi-rgb-led
 clean:
 	rm -f *.o rpi-fb-matrix display-test
 	$(MAKE) -C ./rpi-rgb-led-matrix/lib clean
+
+FORCE:
+.PHONY: FORCE
