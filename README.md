@@ -7,7 +7,7 @@ See the full guide with details on installation and configuration at: https://le
 You **must** clone this repository with the recursive option so that necessary
 submodules are also cloned.  Run this command:
 
-    git clone --recursive https://github.com/adafruit/rpi-fb-matrix.git
+    git clone --recursive https://github.com/hoangphan/rpi-fb-matrix.git
 
 Next you will need a few dependencies (libconfig++) to compile the code.  Run
 these commands to install the dependencies:
